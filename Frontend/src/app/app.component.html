@@ -1,0 +1,15 @@
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="name"><br><br>
+  <input type="file" (change)="onFileSelect($event)" />
+  <br><br>
+  <button type="submit">Upload</button>
+</form>
+
+<div *ngIf="uploadedFiles.length > 0">
+  <h2>Uploaded Files:</h2>
+  <div *ngFor="let file of uploadedFiles">
+    <h3>{{ file.name }}</h3>
+    <img [src]="getImageSrc(file.file)" alt="Uploaded Image" width="700">
+  </div>
+</div>
