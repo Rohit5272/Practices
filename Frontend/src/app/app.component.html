@@ -1,15 +1,46 @@
-
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-  <input type="text" formControlName="name"><br><br>
-  <input type="file" (change)="onFileSelect($event)" />
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput type="text" formControlName="name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Pack Size</mat-label>
+    <input type="text" formControlName="packSize"  matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <input type="text" formControlName="category"  matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>MRP</mat-label>
+    <input type="text" formControlName="MRP"  matInput>
+  </mat-form-field>
   <br><br>
-  <button type="submit">Upload</button>
-</form>
+  <!-- ----------- -->
+  <mat-form-field>
+    <mat-label>Upload File</mat-label>
+    <input type="file" style="display: none" #fileInput (change)="onFileSelect($event)">
+    <button mat-icon-button (click)="preventDefaultSubmit($event); fileInput.click()">
+      <mat-icon>attach_file</mat-icon>
+    </button>
+    <input matInput [value]="selectedFileName" placeholder="Select a file" readonly>
+  </mat-form-field>
+  <!-- -------------- -->
+  <br><br>
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-select formControlName="status">
+        <mat-option value="true">Active</mat-option>
+        <mat-option value="false">Inactive</mat-option>
+    </mat-select>
+  </mat-form-field><br><br>
+  <button mat-raised-button color="primary" type="submit">Upload</button>
+</form> 
 
 <div *ngIf="uploadedFiles.length > 0">
   <h2>Uploaded Files:</h2>
   <div *ngFor="let file of uploadedFiles">
     <h3>{{ file.name }}</h3>
-    <img [src]="getImageSrc(file.file)" alt="Uploaded Image" width="700">
+    <img [src]="getImageSrc(file.file)" alt="Uploaded Image" width="100">
   </div>
 </div>

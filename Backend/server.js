@@ -42,6 +42,10 @@ app.post('/upload', function(req, res) {
     console.log(req.body.name);
     const newUpload = new Upload({
       name: req.body.name, // Include the name field
+      packSize: req.body.packSize,
+      MRP: req.body.MRP,
+      status: req.body.status,
+      category: req.body.category,
       file: {
         data: fs.readFileSync(uploadPath),
         contentType: `${sampleFile.mimetype}`,
